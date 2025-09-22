@@ -38,10 +38,10 @@ const Footer = () => {
             />
             <p className="font-bold text-lg mb-4">Contact Us</p>
             <ul className="text-sm space-y-1">
-              <li>Landline: XXXXXXXXXX</li>
-              <li>WhatsApp: +91XXXXXXXXXX</li>
+              <li>Landline: 044-1234567</li>
+              <li>WhatsApp: +91-9876543210</li>
               <li>Email: stepup@gmail.com</li>
-              <li>Address: 2/38, yyyyyyyy, yyyy</li>
+              <li>Address: 2/38,West Cross Street</li>
               <li>Tenkasi, TamilNadu, India</li>
             </ul>
           </div>
@@ -52,12 +52,12 @@ const Footer = () => {
             <nav aria-label="Shop Links">
               <p className="font-bold text-lg mb-4">Shop</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-gray-300 transition-colors">New In</a></li>
-                <li><a href="#" className="hover:text-gray-300 transition-colors">Women</a></li>
-                <li><a href="#" className="hover:text-gray-300 transition-colors">Men</a></li>
-                <li><a href="#" className="hover:text-gray-300 transition-colors">Accessories</a></li>
-                <li><a href="#" className="hover:text-gray-300 transition-colors">Heels</a></li>
-                <li><a href="#" className="hover:text-gray-300 transition-colors">About Us</a></li>
+                <li><a href="/kids" className="hover:text-gray-300 transition-colors">New In</a></li>
+                <li><a href="/women" className="hover:text-gray-300 transition-colors">Women</a></li>
+                <li><a href="/men" className="hover:text-gray-300 transition-colors">Men</a></li>
+                <li><a href="/" className="hover:text-gray-300 transition-colors">Accessories</a></li>
+                <li><a href="/women" className="hover:text-gray-300 transition-colors">Heels</a></li>
+                <li><a href="/about" className="hover:text-gray-300 transition-colors">About Us</a></li>
               </ul>
             </nav>
 
