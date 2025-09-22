@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Base URL of your backend API (no trailing slash)
-export const API_URL = import.meta.env.DEV ? "/api" : "https://shoe-backend-jbhb.onrender.com";
+export const API_URL = import.meta.env.DEV ? "" : "https://shoe-backend-jbhb.onrender.com";
 
 // -------------------
 // Generic POST with token refresh
