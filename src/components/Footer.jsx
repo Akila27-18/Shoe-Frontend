@@ -53,11 +53,11 @@ const Footer = () => {
               <p className="font-bold text-lg mb-4">Shop</p>
               <ul className="space-y-2 text-sm">
                 <li><a href="/kids" className="hover:text-gray-300 transition-colors">New In</a></li>
-                <li><a href="/women" className="hover:text-gray-300 transition-colors">Women</a></li>
-                <li><a href="/men" className="hover:text-gray-300 transition-colors">Men</a></li>
+                <li><a href="/womens" className="hover:text-gray-300 transition-colors">Women</a></li>
+                <li><a href="/mens" className="hover:text-gray-300 transition-colors">Men</a></li>
                 <li><a href="/" className="hover:text-gray-300 transition-colors">Accessories</a></li>
-                <li><a href="/women" className="hover:text-gray-300 transition-colors">Heels</a></li>
-                <li><a href="/about" className="hover:text-gray-300 transition-colors">About Us</a></li>
+                <li><a href="/womens" className="hover:text-gray-300 transition-colors">Heels</a></li>
+                <li><a href="/About" className="hover:text-gray-300 transition-colors">About Us</a></li>
               </ul>
             </nav>
 
