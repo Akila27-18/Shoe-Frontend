@@ -1,7 +1,7 @@
+// src/api.js
 import axios from "axios";
 
-// Base URL of your backend API (no trailing slash)
-export const API_URL = import.meta.env.DEV ? "" : "https://shoe-backend-jbhb.onrender.com";
+const API_URL = import.meta.env.VITE_API_URL;
 
 // -------------------
 // Generic POST with token refresh
@@ -24,11 +24,9 @@ export const apiPost = async (endpoint, data) => {
   try {
     return await makeRequest(accessToken);
   } catch (err) {
-    // If token expired, try refreshing
     if (err.response?.status === 401 && refreshToken) {
-      const res = await axios.post(`${API_URL}/api/auth/token/refresh/`, {
-        refresh: refreshToken,
-      });
+      // Refresh token
+      const res = await axios.post(`${API_URL}/api/auth/token/refresh/`, { refresh: refreshToken });
       accessToken = res.data.access;
       localStorage.setItem("access_token", accessToken);
       return await makeRequest(accessToken); // Retry original request
@@ -40,21 +38,16 @@ export const apiPost = async (endpoint, data) => {
 // -------------------
 // Products
 // -------------------
-
-// Fetch all products
 export const fetchProducts = async () => {
   const res = await axios.get(`${API_URL}/api/products/`);
-  // If backend returns paginated data, use: return res.data.results;
-  return res.data; 
+  return res.data;
 };
 
-// Fetch single product by ID
 export const fetchProductById = async (id) => {
   const res = await axios.get(`${API_URL}/api/products/${id}/`);
   return res.data;
 };
 
-// Search products by query string
 export const searchProducts = async (query) => {
   const res = await axios.get(`${API_URL}/api/products/search/`, {
     params: { q: query },
@@ -62,13 +55,12 @@ export const searchProducts = async (query) => {
   return res.data;
 };
 
-// Fetch products filtered by category, fix relative image URLs
+// Fetch products by category (mens, womens, kids, brands)
 export const fetchProductsByCategory = async (category) => {
-  const res = await axios.get(`${API_URL}/api/products/`, {
-    params: { category: category.toLowerCase() },
-  });
-
-  return res.data.map((product) => ({
+  const res = await fetch(`${API_URL}/api/products/?category=${category}`);
+  if (!res.ok) throw new Error("Failed to fetch products");
+  const data = await res.json();
+  return data.map((product) => ({
     ...product,
     image:
       product.image && !product.image.startsWith("http")
