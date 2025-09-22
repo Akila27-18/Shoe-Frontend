@@ -1,6 +1,7 @@
 // src/api.js
 import axios from "axios";
 
+// ✅ Use base URL without trailing /api
 export const API_URL = "https://shoe-backend-jbhb.onrender.com";
 
 // -------------------
@@ -55,13 +56,13 @@ export const searchProducts = async (query) => {
   return res.data;
 };
 
-// Fetch products by category (mens, womens, kids, brands)
+// ✅ Updated: use axios instead of fetch, clean URL
 export const fetchProductsByCategory = async (category) => {
-  const res = await fetch(`${API_URL}/products/?category=${category.toLowerCase()}`);
-  if (!res.ok) throw new Error("Failed to fetch products");
-  const data = await res.json();
+  const res = await axios.get(`${API_URL}/api/products/`, {
+    params: { category: category.toLowerCase() },
+  });
 
-  return data.map((product) => ({
+  return res.data.map((product) => ({
     ...product,
     image:
       product.image && !product.image.startsWith("http")
@@ -69,7 +70,6 @@ export const fetchProductsByCategory = async (category) => {
         : product.image,
   }));
 };
-
 
 // -------------------
 // Cart
