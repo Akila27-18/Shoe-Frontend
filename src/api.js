@@ -1,7 +1,7 @@
 // src/api.js
 import axios from "axios";
 
-export const API_URL = "https://shoe-backend-jbhb.onrender.com/api";
+export const API_URL = "https://shoe-backend-jbhb.onrender.com";
 
 // -------------------
 // Generic POST with token refresh
