@@ -1,7 +1,6 @@
-// src/api.js
 import axios from "axios";
 
-// ✅ Use base URL without trailing /api
+// Base URL of your backend API (no trailing slash)
 export const API_URL = "https://shoe-backend-jbhb.onrender.com";
 
 // -------------------
@@ -25,9 +24,11 @@ export const apiPost = async (endpoint, data) => {
   try {
     return await makeRequest(accessToken);
   } catch (err) {
+    // If token expired, try refreshing
     if (err.response?.status === 401 && refreshToken) {
-      // Refresh token
-      const res = await axios.post(`${API_URL}/api/auth/token/refresh/`, { refresh: refreshToken });
+      const res = await axios.post(`${API_URL}/api/auth/token/refresh/`, {
+        refresh: refreshToken,
+      });
       accessToken = res.data.access;
       localStorage.setItem("access_token", accessToken);
       return await makeRequest(accessToken); // Retry original request
@@ -39,16 +40,21 @@ export const apiPost = async (endpoint, data) => {
 // -------------------
 // Products
 // -------------------
+
+// Fetch all products
 export const fetchProducts = async () => {
   const res = await axios.get(`${API_URL}/api/products/`);
-  return res.data;
+  // If backend returns paginated data, use: return res.data.results;
+  return res.data; 
 };
 
+// Fetch single product by ID
 export const fetchProductById = async (id) => {
   const res = await axios.get(`${API_URL}/api/products/${id}/`);
   return res.data;
 };
 
+// Search products by query string
 export const searchProducts = async (query) => {
   const res = await axios.get(`${API_URL}/api/products/search/`, {
     params: { q: query },
@@ -56,7 +62,7 @@ export const searchProducts = async (query) => {
   return res.data;
 };
 
-// ✅ Updated: use axios instead of fetch, clean URL
+// Fetch products filtered by category, fix relative image URLs
 export const fetchProductsByCategory = async (category) => {
   const res = await axios.get(`${API_URL}/api/products/`, {
     params: { category: category.toLowerCase() },
